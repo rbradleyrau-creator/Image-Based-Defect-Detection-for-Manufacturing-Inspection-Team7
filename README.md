@@ -1,4 +1,4 @@
-# Automated Visual Inspectio System for Industry Defect Detection
+# Automated Visual Inspection System for Industry Defect Detection
 
 ## Overview
 This project implements an automated visual inspection pipeline in MATLAB to detect manufacturing defects in industrial components using classical computer vision techniques. The system identifies both color and shape anomalies in metal tubes.
