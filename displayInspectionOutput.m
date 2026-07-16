@@ -1,6 +1,9 @@
 function displayInspectionDashboard(originalImg, maskImg, annotatedImg, reportData)
+% colors
+grey = [0.12 0.12 0.12]
+
 % Create a figure sized moderately to render well in the Live Editor output
-fig = figure('Name', 'Inspection Results', 'Color', 'w', ...
+fig = figure('Name', 'Inspection Results', 'Color', grey, ...
     'Units', 'normalized', 'Position', [0.1 0.1 0.7 0.6]);
 
 % Use a 2-row, 3-column layout to stack images while keeping text on the left
@@ -41,7 +44,7 @@ evidenceText = sprintf(['--- Vision Evidence ---\n', ...
     reportData.ShapeAnomalies, reportData.ColorAnomalies);
 
 text(axText, 0.5, 0.25, evidenceText, 'FontSize', 12, 'HorizontalAlignment', 'center', ...
-    'BackgroundColor', [0.95 0.95 0.95], 'EdgeColor', 'black', 'Margin', 5);
+    'BackgroundColor', grey, 'EdgeColor', 'black', 'Margin', 5);
 
 % =====================================================================
 % RIGHT SIDE (TOP ROW): ORIGINAL & MASK IMAGES
