@@ -1,4 +1,4 @@
-function displayInspectionDashboard(originalImg, maskImg, annotatedImg, reportData)
+function displayInspectionOutput(originalImg, maskImg, annotatedImg, reportData)
 % colors
 grey = [0.12 0.12 0.12]
 
@@ -53,6 +53,7 @@ text(axText, 0.5, 0.25, evidenceText, 'FontSize', 12, 'HorizontalAlignment', 'ce
 ax1 = nexttile(2);
 imshow(originalImg, 'Parent', ax1);
 title(ax1, 'Original Image', 'FontSize', 12);
+
 
 % Image 2: Mask
 ax2 = nexttile(3);
