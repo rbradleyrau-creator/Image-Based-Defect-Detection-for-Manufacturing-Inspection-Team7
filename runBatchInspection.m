@@ -5,8 +5,8 @@ function runBatchInspection(ds)
     numFiles = numel(ds.Files);
     
     % 1. Initialize arrays to store true and predicted labels
-    trueLabels = categorical(NaN(1, 255)); 
-    predictedLabels = categorical(NaN(1, 255));
+    trueLabels = categorical(NaN(1, numFiles)); 
+    predictedLabels = categorical(NaN(1, numFiles));
     
     % 2. Batch Processing Loop
     for i = 1:numFiles
@@ -16,7 +16,7 @@ function runBatchInspection(ds)
     
         % Extract ground truth and pass the data to the tubeClassifierNet model
         actual = ds.Labels(i);
-        imgData = singleImageInspectionFunction(img, false, true);
+        imgData = singleImageInspectionFunction(img, true);
     
         % Append results to your master lists
         trueLabels(i) = actual;
@@ -33,8 +33,8 @@ function runBatchInspection(ds)
     cm.RowSummary = 'row-normalized'; % Shows class-specific true positive rates
     
     % true = pass, false = fail
-    truePF = trueLabels == 'good';
-    predictedPF = predictedLabels == 'good';
+    truePF = (trueLabels == 'good');
+    predictedPF = (predictedLabels == 'good');
     
     figure;
     cmPF = confusionchart(truePF, predictedPF);
@@ -43,8 +43,8 @@ function runBatchInspection(ds)
     cmPF.ColumnDisplayLabels = {'Pass', 'Fail'};
     
     % Yield Rates (Actual + Predicted)
-    trueYield = sum(truePF) / numFiles * 100;
-    predictedYield = sum(predictedPF) / numFiles * 100;
+    trueYield = (sum(truePF) / numFiles) * 100;
+    predictedYield = (sum(predictedPF) / numFiles) * 100;
     out = sprintf("Actual Yield: %.1f%%\nPredicted Yield %.1f%%\n", ...
         trueYield, predictedYield);
     disp(out);
