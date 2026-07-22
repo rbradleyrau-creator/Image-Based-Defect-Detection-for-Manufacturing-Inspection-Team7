@@ -1,4 +1,4 @@
-function displayInspectionOutput(originalImg, maskImg, annotatedImg, reportData)
+function displayInspectionOutput(originalImg, reportData)
 % colors
 grey = [0.12 0.12 0.12]
 
@@ -40,8 +40,8 @@ evidenceText = sprintf(['--- Vision Evidence ---\n', ...
     'Shape Anomalies: %d\n', ...
     'Color Anomalies: %d'], ...
     reportData.Confidence, ...
-    reportData.TotalTubes, reportData.NormalTubes, ...
-    reportData.ShapeAnomalies, reportData.ColorAnomalies);
+    reportData.metrics.TotalTubes, reportData.metrics.NormalTubes, ...
+    reportData.metrics.ShapeAnomalies, reportData.metrics.ColorAnomalies);
 
 text(axText, 0.5, 0.25, evidenceText, 'FontSize', 12, 'HorizontalAlignment', 'center', ...
     'BackgroundColor', grey, 'EdgeColor', 'black', 'Margin', 5);
@@ -57,7 +57,7 @@ title(ax1, 'Original Image', 'FontSize', 12);
 
 % Image 2: Mask
 ax2 = nexttile(3);
-imshow(maskImg, 'Parent', ax2);
+imshow(reportData.images.ImageMask, 'Parent', ax2);
 title(ax2, 'Cleaned Mask', 'FontSize', 12);
 
 % =====================================================================
@@ -65,7 +65,7 @@ title(ax2, 'Cleaned Mask', 'FontSize', 12);
 % =====================================================================
 % Image 3: Object Detection (Spans the bottom 2 columns)
 ax3 = nexttile(5, [1 2]);
-imshow(annotatedImg, 'Parent', ax3);
+imshow(reportData.images.AnnotatedImage, 'Parent', ax3);
 title(ax3, 'Object Detection', 'FontSize', 12);
 
 % Main Title
