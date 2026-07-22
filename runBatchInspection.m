@@ -28,8 +28,11 @@ function runBatchInspection(ds)
     figure;
     cm = confusionchart(trueLabels, predictedLabels);
     cm.Title = 'Batch Test Confusion Matrix';
-    cm.RowDisplayLabels = {'Color Defect', 'Length Defect', 'Good', 'Metal Defect'};
-    cm.ColumnDisplayLabels = {'Color D.', 'Length D.', 'Good', 'Metal D.'};
+    % cm.RowDisplayLabels = {'Color Defect', 'Length Defect', 'Good', 'Metal Defect'};
+    % cm.ColumnDisplayLabels = {'Color D.', 'Length D.', 'Good', 'Metal D.'};
+    labels = string(unique(trueLabels))
+    cm.RowDisplayLabels = labels;
+    cm.ColumnDisplayLabels = labels;
     cm.RowSummary = 'row-normalized'; % Shows class-specific true positive rates
     
     % true = pass, false = fail
