@@ -42,8 +42,8 @@ function runBatchInspection(ds)
     figure;
     cmPF = confusionchart(truePF, predictedPF);
     cmPF.Title = 'Batch Test Confusion Matrix PF';
-    cmPF.RowDisplayLabels = {'Pass', 'Fail'};
-    cmPF.ColumnDisplayLabels = {'Pass', 'Fail'};
+    cmPF.RowDisplayLabels = {'Fail', 'Pass'};
+    cmPF.ColumnDisplayLabels = {'Fail', 'Pass'};
     
     % Yield Rates (Actual + Predicted)
     trueYield = (sum(truePF) / numFiles) * 100;
