@@ -11,7 +11,7 @@
 % Added the new "inclusive" test Dataset as a function output for use in 
 % other parts of the overall program.
 
-function inclusiveDS = training(ds)
+function inclusiveValidationDS = training(ds)
 
 % Split the dataset into sub-datasets based on  category
 dsGood = subset(ds, ds.Labels == "good");
@@ -35,7 +35,7 @@ inclusiveDS = imageDatastore(allTestFiles, 'Labels', allTestLabels);
 % training the model
 allValFiles = [dsGoodValidation.Files; dsColorValidation.Files; dsLengthValidation.Files; dsMalformedValidation.Files];
 allValLabels = [dsGoodValidation.Labels; dsColorValidation.Labels; dsLengthValidation.Labels; dsMalformedValidation.Labels];
-inclusiveValidationDs = imageDatastore(allValFiles, 'Labels', allValLabels);
+inclusiveValidationDS = imageDatastore(allValFiles, 'Labels', allValLabels);
 
 % determine the number of classes that we have
 %TO-DO: Change the location of the anomalous images in the Tube sub dataset
@@ -63,7 +63,7 @@ augmenter = imageDataAugmenter(RandXReflection=true, RandYReflection=true);
 % Create temporary datastore pipelines for training and validation datasets
 % that contain within them the resized images.
 augDsTrain = augmentedImageDatastore(imageSize, inclusiveDS, "DataAugmentation",augmenter);
-augDsValidation = augmentedImageDatastore(imageSize, inclusiveValidationDs);
+augDsValidation = augmentedImageDatastore(imageSize, inclusiveValidationDS);
 
 % Loads the pre-trained resnet18 and replaces the final layer containing
 % within it the preset 1000 classifications.
